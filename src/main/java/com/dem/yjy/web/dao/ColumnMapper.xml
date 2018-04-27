@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dem.yjy.web.dao.ColumnMapper">
+	<resultMap id="BaseResultMap"
+		type="com.dem.yjy.web.model.Column">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="`column_name`" jdbcType="VARCHAR"
+			property="columnName" />
+		<result column="column_info" jdbcType="VARCHAR"
+			property="columnInfo" />
+		<result column="column_title" jdbcType="VARCHAR"
+			property="columnTitle" />
+		<result column="column_keyword" jdbcType="VARCHAR"
+			property="columnKeyword" />
+		<result column="column_sort" jdbcType="INTEGER"
+			property="columnSort" />
+		<result column="column_status" jdbcType="INTEGER"
+			property="columnStatus" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, `column_name`, column_info, column_title, column_keyword,
+		column_sort, column_status
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.dem.yjy.web.model.ColumnExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from `column`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from `column`
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from `column`
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.dem.yjy.web.model.ColumnExample">
+		delete from `column`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.dem.yjy.web.model.Column">
+		insert into `column` (id, `column_name`, column_info,
+		column_title, column_keyword, column_sort,
+		column_status)
+		values (#{id,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR},
+		#{columnInfo,jdbcType=VARCHAR},
+		#{columnTitle,jdbcType=VARCHAR}, #{columnKeyword,jdbcType=VARCHAR}, #{columnSort,jdbcType=INTEGER},
+		#{columnStatus,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.dem.yjy.web.model.Column">
+		insert into `column`
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="columnName != null">
+				`column_name`,
+			</if>
+			<if test="columnInfo != null">
+				column_info,
+			</if>
+			<if test="columnTitle != null">
+				column_title,
+			</if>
+			<if test="columnKeyword != null">
+				column_keyword,
+			</if>
+			<if test="columnSort != null">
+				column_sort,
+			</if>
+			<if test="columnStatus != null">
+				column_status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="columnName != null">
+				#{columnName,jdbcType=VARCHAR},
+			</if>
+			<if test="columnInfo != null">
+				#{columnInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="columnTitle != null">
+				#{columnTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="columnKeyword != null">
+				#{columnKeyword,jdbcType=VARCHAR},
+			</if>
+			<if test="columnSort != null">
+				#{columnSort,jdbcType=INTEGER},
+			</if>
+			<if test="columnStatus != null">
+				#{columnStatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.dem.yjy.web.model.ColumnExample"
+		resultType="java.lang.Long">
+		select count(*) from `column`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update `column`
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=VARCHAR},
+			</if>
+			<if test="record.columnName != null">
+				`column_name` = #{record.columnName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.columnInfo != null">
+				column_info = #{record.columnInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.columnTitle != null">
+				column_title = #{record.columnTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.columnKeyword != null">
+				column_keyword = #{record.columnKeyword,jdbcType=VARCHAR},
+			</if>
+			<if test="record.columnSort != null">
+				column_sort = #{record.columnSort,jdbcType=INTEGER},
+			</if>
+			<if test="record.columnStatus != null">
+				column_status = #{record.columnStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update `column`
+		set id = #{record.id,jdbcType=VARCHAR},
+		`column_name` = #{record.columnName,jdbcType=VARCHAR},
+		column_info = #{record.columnInfo,jdbcType=VARCHAR},
+		column_title = #{record.columnTitle,jdbcType=VARCHAR},
+		column_keyword = #{record.columnKeyword,jdbcType=VARCHAR},
+		column_sort = #{record.columnSort,jdbcType=INTEGER},
+		column_status = #{record.columnStatus,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dem.yjy.web.model.Column">
+		update `column`
+		<set>
+			<if test="columnName != null">
+				`column_name` = #{columnName,jdbcType=VARCHAR},
+			</if>
+			<if test="columnInfo != null">
+				column_info = #{columnInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="columnTitle != null">
+				column_title = #{columnTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="columnKeyword != null">
+				column_keyword = #{columnKeyword,jdbcType=VARCHAR},
+			</if>
+			<if test="columnSort != null">
+				column_sort = #{columnSort,jdbcType=INTEGER},
+			</if>
+			<if test="columnStatus != null">
+				column_status = #{columnStatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.dem.yjy.web.model.Column">
+		update `column`
+		set `column_name` = #{columnName,jdbcType=VARCHAR},
+		column_info = #{columnInfo,jdbcType=VARCHAR},
+		column_title = #{columnTitle,jdbcType=VARCHAR},
+		column_keyword = #{columnKeyword,jdbcType=VARCHAR},
+		column_sort = #{columnSort,jdbcType=INTEGER},
+		column_status = #{columnStatus,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateSortByPrimaryKey"
+		parameterType="com.dem.yjy.web.model.Column">
+		update `column`
+		set 
+		column_sort = #{columnSort,jdbcType=INTEGER}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>
