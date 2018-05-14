@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.dem.yjy.web.model.Article">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="article_name" jdbcType="VARCHAR" property="articleName" />
+    <result column="artcile_column" jdbcType="VARCHAR" property="artcileColumn" />
     <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
     <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
     <result column="article_keyword" jdbcType="VARCHAR" property="articleKeyword" />
@@ -70,10 +71,24 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, article_name, article_content, article_title, article_keyword, article_info, 
-    article_sort, article_status
+    id, article_name, artcile_column, article_content, article_title, article_keyword, 
+    article_info, article_sort, article_status
   </sql>
   <select id="selectByExample" parameterType="com.dem.yjy.web.model.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" parameterType="com.dem.yjy.web.model.ArticleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,12 +119,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dem.yjy.web.model.Article">
-    insert into article (id, article_name, article_content, 
-      article_title, article_keyword, article_info, 
-      article_sort, article_status)
-    values (#{id,jdbcType=VARCHAR}, #{articleName,jdbcType=VARCHAR}, #{articleContent,jdbcType=VARCHAR}, 
-      #{articleTitle,jdbcType=VARCHAR}, #{articleKeyword,jdbcType=VARCHAR}, #{articleInfo,jdbcType=VARCHAR}, 
-      #{articleSort,jdbcType=INTEGER}, #{articleStatus,jdbcType=INTEGER})
+    insert into article (id, article_name, artcile_column, 
+      article_content, article_title, article_keyword, 
+      article_info, article_sort, article_status
+      )
+    values (#{id,jdbcType=VARCHAR}, #{articleName,jdbcType=VARCHAR}, #{artcileColumn,jdbcType=VARCHAR}, 
+      #{articleContent,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{articleKeyword,jdbcType=VARCHAR}, 
+      #{articleInfo,jdbcType=VARCHAR}, #{articleSort,jdbcType=INTEGER}, #{articleStatus,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dem.yjy.web.model.Article">
     insert into article
@@ -119,6 +136,9 @@
       </if>
       <if test="articleName != null">
         article_name,
+      </if>
+      <if test="artcileColumn != null">
+        artcile_column,
       </if>
       <if test="articleContent != null">
         article_content,
@@ -146,6 +166,9 @@
       <if test="articleName != null">
         #{articleName,jdbcType=VARCHAR},
       </if>
+      <if test="artcileColumn != null">
+        #{artcileColumn,jdbcType=VARCHAR},
+      </if>
       <if test="articleContent != null">
         #{articleContent,jdbcType=VARCHAR},
       </if>
@@ -172,6 +195,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="getTop" resultType="java.lang.Integer">
+    select max(article_sort) from article
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update article
     <set>
@@ -180,6 +206,9 @@
       </if>
       <if test="record.articleName != null">
         article_name = #{record.articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artcileColumn != null">
+        artcile_column = #{record.artcileColumn,jdbcType=VARCHAR},
       </if>
       <if test="record.articleContent != null">
         article_content = #{record.articleContent,jdbcType=VARCHAR},
@@ -208,6 +237,7 @@
     update article
     set id = #{record.id,jdbcType=VARCHAR},
       article_name = #{record.articleName,jdbcType=VARCHAR},
+      artcile_column = #{record.artcileColumn,jdbcType=VARCHAR},
       article_content = #{record.articleContent,jdbcType=VARCHAR},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
       article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
@@ -223,6 +253,9 @@
     <set>
       <if test="articleName != null">
         article_name = #{articleName,jdbcType=VARCHAR},
+      </if>
+      <if test="artcileColumn != null">
+        artcile_column = #{artcileColumn,jdbcType=VARCHAR},
       </if>
       <if test="articleContent != null">
         article_content = #{articleContent,jdbcType=VARCHAR},
@@ -248,6 +281,7 @@
   <update id="updateByPrimaryKey" parameterType="com.dem.yjy.web.model.Article">
     update article
     set article_name = #{articleName,jdbcType=VARCHAR},
+      artcile_column = #{artcileColumn,jdbcType=VARCHAR},
       article_content = #{articleContent,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
       article_keyword = #{articleKeyword,jdbcType=VARCHAR},

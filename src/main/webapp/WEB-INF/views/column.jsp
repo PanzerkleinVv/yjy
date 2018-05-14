@@ -26,21 +26,21 @@
 				<button id="saveBut" type="button" class="btn blue columnForm"
 					onclick="save('${column.id}')">保存</button> <c:choose>
 					<c:when test="${column.columnStatus == 1}">
-						<button id="stopBut" type="button" class="btn blue columnForm"
+						<button id="stopBut" type="button" class="btn red columnForm"
 							onclick="stop('${column.id}')">停用</button>
 						<button id="startBut" type="button"
-							class="btn blue columnForm columnStatus"
+							class="btn green columnForm columnStatus"
 							onclick="start('${column.id}')">启用</button>
 					</c:when>
 					<c:otherwise>
 						<button id="stopBut" type="button"
-							class="btn blue columnForm columnStatus"
+							class="btn red columnForm columnStatus"
 							onclick="stop('${column.id}')">停用</button>
-						<button id="startBut" type="button" class="btn blue columnForm"
+						<button id="startBut" type="button" class="btn green columnForm"
 							onclick="start('${column.id}')">启用</button>
 					</c:otherwise>
 				</c:choose>
-				<button id="cancelBut" type="button" class="btn blue columnForm"
+				<button id="cancelBut" type="button" class="btn red columnForm"
 					onclick="cancel('${column.id}')">取消</button></span>
 		</div>
 	</c:forEach>
@@ -62,7 +62,7 @@
 				type="button" class="btn blue columnNormal" onclick="edit('add')">新增</button>
 			<button id="saveBut" type="button" class="btn blue columnForm"
 				onclick="save('add')">保存</button>
-			<button id="cancelBut" type="button" class="btn blue columnForm"
+			<button id="cancelBut" type="button" class="btn red columnForm"
 				onclick="cancel('add')">取消</button></span>
 	</div>
 	<div style="color:${msg0};" id="sortMsg">${msg}</div>

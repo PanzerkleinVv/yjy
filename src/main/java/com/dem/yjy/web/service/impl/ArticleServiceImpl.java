@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.dem.yjy.web.dao.ArticleMapper;
 import com.dem.yjy.web.model.ArticleExample;
+import com.dem.yjy.web.model.ArticleExample.Criteria;
+import com.dem.yjy.web.model.ArticleQuery;
 import com.dem.yjy.web.service.ArticleService;
 import com.dem.yjy.web.model.Article;
+import com.dem.yjy.core.feature.orm.mybatis.Page;
 import com.dem.yjy.core.generic.GenericDao;
 import com.dem.yjy.core.generic.GenericServiceImpl;
 
@@ -47,7 +50,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 	@Override
 	public List<Article> selectList() {
 		ArticleExample example = new ArticleExample();
-		example.createCriteria().andIdIsNotNull();
+		example.createCriteria().andIdIsNotNull().andArticleStatusEqualTo(1);
 		example.setOrderByClause("article_sort");
 		return articleMapper.selectByExample(example);
 	}
@@ -92,6 +95,37 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 		ArticleExample example = new ArticleExample();
 		example.createCriteria().andIdIsNotNull();
 		return articleMapper.countByExample(example);
+	}
+
+	@Override
+	public int getTop() {
+		final Integer max = articleMapper.getTop();
+		if (max == null) {
+			return 0;
+		} else {
+			return max;
+		}
+	}
+
+	@Override
+	public List<Article> getPage(ArticleQuery articleQuery) {
+		if (articleQuery != null) {
+			int pageNo = 1;
+			if (articleQuery.getPageNo() != null) {
+				pageNo = articleQuery.getPageNo();
+			}
+			Page<Article> page = new Page<>(pageNo);
+			ArticleExample example = new ArticleExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andIdIsNotNull().andArticleStatusEqualTo(1);
+			if (articleQuery.getColumn() != null) {
+				criteria.andArtcileColumnEqualTo(articleQuery.getColumn());
+			}
+			example.setOrderByClause("article_sort");
+			return articleMapper.selectByExampleAndPage(example, page);
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.dem.yjy.web.service;
 
+import com.dem.yjy.web.model.ArticleQuery;
 import com.dem.yjy.web.model.Article;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface ArticleService extends GenericService<Article, String> {
 	public int updateSort(String[] ids) throws Exception;
 	
 	public long countAll();
+	
+	public int getTop();
+	
+	public List<Article> getPage(ArticleQuery articleQuery);
 }

@@ -5,7 +5,9 @@ public class Article {
 
 	private String articleName;
 
-	private String articleContent;
+    private String artcileColumn;
+
+    private String articleContent;
 
 	private String articleTitle;
 
@@ -16,6 +18,10 @@ public class Article {
     private Integer articleSort;
 
     private Integer articleStatus;
+    
+    private String msg;
+    
+    private String msg0;
 
 	public String getId() {
 		return id;
@@ -29,9 +35,17 @@ public class Article {
 		return articleName;
 	}
 
-	public void setArticleName(String articleName) {
-		this.articleName = articleName == null ? null : articleName.trim();
-	}
+    public void setArticleName(String articleName) {
+        this.articleName = articleName == null ? null : articleName.trim();
+    }
+
+    public String getArtcileColumn() {
+        return artcileColumn;
+    }
+
+    public void setArtcileColumn(String artcileColumn) {
+        this.artcileColumn = artcileColumn == null ? null : artcileColumn.trim();
+    }
 
 	public String getArticleContent() {
 		return articleContent;
@@ -80,4 +94,20 @@ public class Article {
     public void setArticleStatus(Integer articleStatus) {
         this.articleStatus = articleStatus;
     }
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public String getMsg0() {
+		return msg0;
+	}
+
+	public void setMsg0(String msg0) {
+		this.msg0 = msg0;
+	}
 }

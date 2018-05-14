@@ -1,5 +1,6 @@
 package com.dem.yjy.web.dao;
 
+import com.dem.yjy.core.feature.orm.mybatis.Page;
 import com.dem.yjy.core.generic.GenericDao;
 import com.dem.yjy.web.model.Article;
 import com.dem.yjy.web.model.ArticleExample;
@@ -18,6 +19,8 @@ public interface ArticleMapper extends GenericDao<Article, String> {
 	int insertSelective(Article record);
 
 	List<Article> selectByExample(ArticleExample example);
+	
+	List<Article> selectByExampleAndPage(ArticleExample example, Page<Article> page);
 
 	Article selectByPrimaryKey(String id);
 
@@ -28,4 +31,6 @@ public interface ArticleMapper extends GenericDao<Article, String> {
 	int updateByPrimaryKeySelective(Article record);
 
 	int updateByPrimaryKey(Article record);
+	
+	Integer getTop();
 }

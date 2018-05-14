@@ -3,11 +3,19 @@
 <div class="mainContent">
 	<div class="articleList">
 		<div class="infoMethod">文章管理</div>
+		<div>
+			<select id="queryColumn">
+				<option></option>
+				<c:forEach var="column" items="{columns}">
+					<option value="${column.id}"
+						<c:if test="${queryColumn eq column.id}">selected="selected"</c:if>>${column.column.Name}</option>
+				</c:forEach>
+			</select>
+		</div>
 		<c:forEach var="article" items="${articles}" varStatus="status">
 			<div id="${article.id}" class="articleLine sortableLine">
-				<span class="articleSpanContent"> <span class="articleName">${article.articleName}<c:if
-							test="${article.articleStatus == 0}">（已停用）</c:if>
-				</span>
+				<span class="articleSpanContent"> <span class="articleName">${article.articleName}
+				</span> <span class="artcileColumn">${article.artcileColumn} </span>
 				</span> <span class="articleSpanButton"><button id="editBut"
 						type="button" class="btn blue articleNormal"
 						onclick="edit('${article.id}')">修改</button>
@@ -80,35 +88,53 @@
 	</div>
 	<div class="articleContent">
 		<span class="articleForm"><span>文章名：</span><input type="text"
-			id="articleName" value="${article.articleName}"
-			class="form-control placeholder-no-fix" onblur="check(this)" /></span> <span
-			class="articleForm"><span>文章title：</span><input type="text"
-			id="articleTitle" value="${article.articleTitle}"
-			class="form-control placeholder-no-fix" onblur="check(this)" /></span> <span
-			class="articleForm"><span>文章keyword：</span><input type="text"
-			id="articleKeyword" value="${article.articleKeyword}"
+			id="articleName" class="form-control placeholder-no-fix"
+			onblur="check(this)" /></span> <span class="articleForm"><span>文章title：</span><input
+			type="text" id="articleTitle" class="form-control placeholder-no-fix"
+			onblur="check(this)" /></span> <span class="articleForm"><span>文章keyword：</span><input
+			type="text" id="articleKeyword"
 			class="form-control placeholder-no-fix" onblur="check(this)" /></span> <span
 			class="articleForm"><span>文章description：</span><input
-			type="text" id="articleInfo" value="${article.articleInfo}"
-			class="form-control placeholder-no-fix" onblur="check(this)" /></span> <input
-			type="hidden" id="id" value="${article.id}" /><span id="msg"
-			class="articleForm"></span> <span class="articleSpanButton"><button
-				id="saveBut" type="button" class="btn blue articleNormal"
-				onclick="save('${article.id}')">保存</button>
+			type="text" id="articleInfo" class="form-control placeholder-no-fix"
+			onblur="check(this)" /></span> <input type="hidden" id="id" /><span
+			id="msg" class="articleForm"><span>文章内容：</span> <span
+			id="summernote" class="uploadItem"></span></span> <span
+			class="articleSpanButton"><button id="saveBut" type="button"
+				class="btn blue articleNormal" onclick="save()">保存</button>
 			<button id="cancelBut" type="button" class="btn blue articleForm"
-				onclick="cancel('${article.id}')">取消</button>
-			<button id="deleteBut" type="button" class="btn blue articleForm"
-				onclick="delete('${article.id}')">删除</button> </span>
+				onclick="cancel()">取消</button>
+			<button id="deleteBut" type="button" class="btn red articleForm"
+				onclick="del()">删除</button> </span>
 	</div>
 	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#summernote').summernote({
+				height : 500,
+				minHeight : null,
+				maxHeight : null,
+				lang: 'zh-CN',
+				toolbar: [
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['fontsize', ['fontname', 'fontsize']],
+					['color', ['color']],
+					[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+					[ 'Insert', [ 'table' ] ] ],
+				fontNames: ['宋体', '黑体', '楷体', '微软雅黑'],
+				disableDragAndDrop: true
+			});
+		});
+		
 		function edit(id) {
 			$(".articleList").hide("fast");
 			$(".articleContent").show("fast");
 			if (id == 'add') {
+				$('#id').val("add");
 				$('#articleName').val("");
 				$('#articleTitle').val("");
 				$('#articleKeyword').val("");
 				$('#articleInfo').val("");
+				$('#summernote').summernote('code', "");
+				$('#articleColumn').val("");
 			} else {
 				var url = 'rest/article/getOne';
 				$.getJSON(url, {
@@ -119,6 +145,8 @@
 					$('#articleTitle').val(data.articleTitle);
 					$('#articleKeyword').val(data.articleKeyword);
 					$('#articleInfo').val(data.articleInfo);
+					$('#summernote').summernote('code', data.articleContet);
+					$('#articleColumn').val(data.articleColumn);
 				});
 			}
 		}
@@ -128,93 +156,38 @@
 			$(".articleContent").hide("fast");
 		}
 
-		function save(id) {
-			if (check($('#' + id + "_name").get(0))) {
-				if (check($('#' + id + "_title").get(0))) {
-					if (check($('#' + id + "_keyword").get(0))) {
-						if (check($('#' + id + "_info").get(0))) {
-							if (id == 'add') {
-								var url = 'rest/article/add';
-								$.get(url,
-										{
-											'articleName' : $(
-													'#' + id + "_name").val(),
-											'articleTitle' : $(
-													'#' + id + "_title").val(),
-											'articleKeyword' : $(
-													'#' + id + "_keyword")
-													.val(),
-											'articleInfo' : $(
-													'#' + id + "_info").val()
-										}, function(data) {
-											$('#main-content').html(data);
-										});
-							} else {
+		function save() {
+			var id = $('#id').val();
+			if (check($('#articleName').get(0))) {
+				if (check($('#articleTitle').get(0))) {
+					if (check($('#articleKeyword').get(0))) {
+						if (check($('#articleInfo').get(0))) {
+							if (check($('#articleColumn').get(0))) {
 								var url = 'rest/article/save';
-								$
-										.getJSON(
-												url,
-												{
-													'id' : $(
-															'#'
-																	+ id
-																	+ " input[name='ids']")
-															.val(),
-													'articleName' : $(
-															'#' + id + "_name")
-															.val(),
-													'articleTitle' : $(
-															'#' + id + "_title")
-															.val(),
-													'articleKeyword' : $(
-															'#'
-																	+ id
-																	+ "_keyword")
-															.val(),
-													'articleInfo' : $(
-															'#' + id + "_info")
-															.val()
-												},
-												function(data) {
-													$('#' + id + "_name").val(
-															data.articleName);
-													$(
-															'#'
-																	+ id
-																	+ " .articleName")
-															.html(
-																	data.articleName);
-													if (data.articleStatus == 0) {
-														$(
-																'#'
-																		+ id
-																		+ " .articleName")
-																.append("（已停用）");
-													}
-													$('#' + id + "_title").val(
-															data.articleTitle);
-													$('#' + id + "_keyword")
-															.val(
-																	data.articleKeyword);
-													$('#' + id + "_info").val(
-															data.articleInfo);
-													$(
-															'#'
-																	+ id
-																	+ " .articleNormal")
-															.show("fast");
-													$(
-															'#'
-																	+ id
-																	+ " .articleForm")
-															.hide("fast");
-													$('#' + id + " #msg").css(
-															'display', 'block');
-													$('#' + id + " #msg").css(
-															'color', data.msg0);
-													$('#' + id + " #msg").html(
-															data.msg);
-												});
+								$.getJSON(url, 
+										{
+											'id' : $('#id').val(),
+											'articleName' : $('#articleName').val(),
+											'articleContent' : $('#summernote').summernote('code'),
+											'articleTitle' : $('#articleTitle').val(),
+											'articleKeyword' : $('#articleKeyword').val(),
+											'articleInfo' : $('#articleInfo').val(),
+											'articleColumn' : $('#articleColumn').val()
+										},
+										function(data) {
+											$('#id').val(data.id);
+											$('#articleName').val(data.articleName);
+											$('#articleTitle').val(data.articleTitle);
+											$('#articleKeyword').val(data.articleKeyword);
+											$('#articleInfo').val(data.articleInfo);
+											$('#summernote').summernote('code', data.articleContet);
+											$('#articleColumn').val(data.articleColumn);
+											$("#msg").css('display', 'block');
+											$("#msg").css('color', data.msg0);
+											$("#msg").html(data.msg);
+								});
+							} else {
+								return false;
 							}
 						} else {
 							return false;
@@ -255,7 +228,7 @@
 			});
 		}
 
-		function stop(id) {
+		function del() {
 			var url = 'rest/article/stop';
 			$.getJSON(url, {
 				'id' : $('#' + id + " input[name='ids']").val()

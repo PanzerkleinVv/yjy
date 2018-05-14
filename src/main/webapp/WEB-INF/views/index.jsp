@@ -122,8 +122,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="javascript:;">
-                                        用户管理
+                                    <a href="rest/article/getList">
+                                        文章管理
                                     </a>
                                 </li>
                                 <li>
@@ -304,6 +304,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
+        <script type="text/javascript"
+		src="assets/plugins/summernote/lang/summernote-zh-CN.js"
+		charset="UTF-8"></script>
 
         <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->
     </body>

@@ -13,66 +13,88 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dem.yjy.core.util.ApplicationUtils;
 import com.dem.yjy.web.enums.MessageColor;
+import com.dem.yjy.web.model.Article;
+import com.dem.yjy.web.model.ArticleQuery;
 import com.dem.yjy.web.model.Column;
 import com.dem.yjy.web.service.ArticleService;
-import com.dem.yjy.web.service.ColumnService;
 
 @Controller
-@RequestMapping(value = "/column")
+@RequestMapping(value = "/article")
 public class ArticleController {
 
 	@Resource
 	private ArticleService articleService;
 
 	@RequestMapping(value = "/getList")
-	public String getList(Model model) {
-		List<Article> columns = columnService.selectList();
-		model.addAttribute("columns", columns);
-		return "column";
+	public String getList(ArticleQuery articleQuery, Model model) {
+		List<Article> articles = articleService.getPage(articleQuery);
+		model.addAttribute("articles", articles);
+		return "article";
 	}
 
 	@RequestMapping(value = "/getOne")
 	@ResponseBody
 	public Article getOne(@Valid String id) {
-		return columnService.selectById(id);
+		return articleService.selectById(id);
 	}
 
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Article save(Article column) {
-		final int flag = columnService.update(column);
-		final Article column0 = columnService.selectById(column.getId());
-		if (flag > 0) {
-			column0.setMsg0(MessageColor.SUCCESS.getColor());
-			column0.setMsg("保存成功");
+	public Article save(Article article) {
+		if (article != null && article.getId() != null) {
+			if ("add".equals(article.getId())) {
+				article.setId(ApplicationUtils.sha256Hex(ApplicationUtils.randomUUID()));
+				article.setArticleSort(articleService.getTop() + 1);
+				article.setArticleStatus(1);
+				final int flag = articleService.insert(article);
+				if (flag != 0) {
+					article.setMsg0(MessageColor.SUCCESS.getColor());
+					article.setMsg("新增成功");
+				} else {
+					article.setMsg0(MessageColor.FAILURE.getColor());
+					article.setMsg("新增失败");
+				}
+				return article;
+			} else {
+				final int flag = articleService.update(article);
+				final Article article0 = articleService.selectById(article.getId());
+				if (flag > 0) {
+					article0.setMsg0(MessageColor.SUCCESS.getColor());
+					article0.setMsg("保存成功");
+				} else {
+					article0.setMsg0(MessageColor.FAILURE.getColor());
+					article0.setMsg("保存失败");
+				}
+				return article0;
+			}
 		} else {
-			column0.setMsg0(MessageColor.FAILURE.getColor());
-			column0.setMsg("保存失败");
+			article.setMsg0(MessageColor.FAILURE.getColor());
+			article.setMsg("保存失败");
+			return article;
 		}
-		return column0;
 	}
 
 	@RequestMapping(value = "/start")
 	@ResponseBody
-	public Article start(Article column) {
-		column.setArticleStatus(1);
-		final int flag = columnService.update(column);
-		final Column column0 = columnService.selectById(column.getId());
+	public Article start(Article article) {
+		article.setArticleStatus(1);
+		final int flag = articleService.update(article);
+		final Article article0 = articleService.selectById(article.getId());
 		if (flag > 0) {
-			column0.setMsg0(MessageColor.SUCCESS.getColor());
-			column0.setMsg("启用成功");
+			article0.setMsg0(MessageColor.SUCCESS.getColor());
+			article0.setMsg("启用成功");
 		} else {
-			column0.setMsg0(MessageColor.FAILURE.getColor());
-			column0.setMsg("启用失败");
+			article0.setMsg0(MessageColor.FAILURE.getColor());
+			article0.setMsg("启用失败");
 		}
-		return column0;
+		return article0;
 	}
 
-	@RequestMapping(value = "/sort")
+	@RequestMapping(value = "/top")
 	@ResponseBody
-	public Column sort(HttpServletRequest request) throws Exception {
+	public Column top(HttpServletRequest request) throws Exception {
 		String[] ids = request.getParameterValues("ids[]");
-		final int flag = columnService.updateSort(ids);
+		final int flag = articleService.updateSort(ids);
 		Column column = new Column();
 		if (flag != 0) {
 			column.setMsg0(MessageColor.SUCCESS.getColor());
@@ -82,24 +104,5 @@ public class ArticleController {
 			column.setMsg("排序失败");
 		}
 		return column;
-	}
-
-	@RequestMapping(value = "/add")
-	public String add(Column column, Model model) {
-		final long count = columnService.countAll();
-		column.setId(ApplicationUtils.sha256Hex(ApplicationUtils.randomUUID()));
-		column.setColumnSort((int) count + 1);
-		column.setColumnStatus(1);
-		final int flag = columnService.insert(column);
-		if (flag != 0) {
-			model.addAttribute("msg0", MessageColor.SUCCESS.getColor());
-			model.addAttribute("msg", "新增成功");
-		} else {
-			model.addAttribute("msg0", MessageColor.FAILURE.getColor());
-			model.addAttribute("msg", "新增失败");
-		}
-		List<Column> columns = columnService.selectList();
-		model.addAttribute("columns", columns);
-		return "column";
 	}
 }
