@@ -3,12 +3,12 @@ package com.dem.yjy.web.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dem.yjy.core.util.ApplicationUtils;
@@ -85,8 +85,7 @@ public class ColumnController {
 
 	@RequestMapping(value = "/sort")
 	@ResponseBody
-	public Column sort(HttpServletRequest request) throws Exception {
-		String[] ids = request.getParameterValues("ids[]");
+	public Column sort(@RequestParam(value = "ids[]") String[] ids) throws Exception {
 		final int flag = columnService.updateSort(ids);
 		Column column = new Column();
 		if (flag != 0) {

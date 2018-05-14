@@ -5,9 +5,8 @@
 }
 
 .toolbarBox {
-	position: absolute;
 	background-color: #EEEEEE;
-	border: 1px solid #1570a6;
+	width: 100%;
 }
 
 .closeQuery {
@@ -17,8 +16,13 @@
 }
 
 .pageBox {
+	width: 100%;
 	text-align: center;
-	bottom: 0px;
+	display: bolck !important;
+}
+
+.pageBox>span {
+	display: inline !important;
 }
 
 .navbar-brandText {
@@ -46,15 +50,22 @@
 	font-family: 微软雅黑;
 }
 
-.queryLine>div {
+.queryLine>.queryTitle {
 	margin-left: 5%;
 	width: 90%;
 	text-align: left;
 }
 
-.halfWidth {
-	width: 48%;
-	display: inline;
+.form_date {
+	cursor: text !important;
+}
+
+.input-long {
+	width: 200px;
+}
+
+.input-longPlus {
+	width: 500px;
 }
 
 .middleSpan {
@@ -87,36 +98,23 @@
 	border-collapse: collapse;
 }
 
-.msgItem1 {
-	display: table-cell;
-}
-
-.msgItem2 {
-	width: 150px !important;
+.msgItem {
+	font-size: 12pt;
 	display: table-cell;
 	text-align: center;
-	border-left: 2px solid #FFFFFF;
+	border: 1px solid #EEEEEE;
 }
 
-.msgItem3 {
-	width: 120px !important;
-	display: table-cell;
-	text-align: center;
-	border-left: 2px solid #FFFFFF;
+.msgItem:first-child {
+	border-left: 0 !important;
 }
 
-.msgItem4 {
-	width: 56px !important;
-	display: table-cell;
-	text-align: center;
-	border-left: 2px solid #FFFFFF;
-}
-
-.msgItem5 {
-	width: 56px !important;
-	display: table-cell;
-	text-align: center;
-	border-left: 2px solid #FFFFFF;
+.msgItem.content {
+	text-align: left;
+	width: 300px;
+	max-height: 150px;
+    overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .msgHeader {
@@ -124,6 +122,7 @@
 	background-color: #1570a6 !important;
 	font-family: 微软雅黑;
 	color: #FFFFFF;
+	height: 30px !important;
 }
 
 .msgTable .msg:nth-child(odd) {
@@ -146,8 +145,51 @@
 	background-color: #FFFFFF;
 }
 
+.msgSponsorContent {
+	border: 1px solid #999999;
+}
+
+.msgSponsorContent>div:first-child {
+	background-color: #3c9dff !important;
+}
+
 .msgTitle {
 	font-family: 微软雅黑;
+	line-height: 24px;
+	margin-left: 5px;
+}
+
+.contentTitle {
+	font-family: 楷体;
+	font-size: 18px;
+}
+
+.submissionBox {
+	width: 98%;
+	border: 1px solid #EEEEEE;
+	margin-top: 10px;
+}
+
+.submissionTitle {
+	background-color: #EEEEEE !important;
+}
+
+.msgContentBox {
+	margin: 0 1% 0 1% !important;
+	border: 1px solid #EEEEEE;
+}
+
+.submissionTitle>span {
+	font-family: 黑体 !important;
+	font-size: 17px;
+}
+
+.middleTitle {
+	text-align: center;
+}
+
+.middleTitle2 {
+	padding: 0 1% 0 1% !important;
 }
 
 #goback {
@@ -174,6 +216,29 @@
 	display: block;
 	margin-left: 5%;
 	margin-right: 5%;
+}
+
+.navigationBar {
+	font-size: 12pt;
+	font-family: '微软雅黑';
+	color: #222222;
+	padding-left: 10px;
+	background-color: #DDDDDD;
+}
+
+.navigationBar>span {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.navigationItem {
+	background-color: #FFFFFF;
+	padding: 1px 5px 1px 5px;
+}
+
+.searchUser {
+	width: 50%;
+	display: inline;
 }
 
 .searchBox {
@@ -206,22 +271,10 @@
 	background-color: #EEEEEE;
 }
 
-.userItem1 {
+.userItem {
 	display: table-cell;
 	border-left: 2px solid #FFFFFF;
-}
-
-.userItem2 {
-	display: table-cell;
-	width: 150px;
-	border-left: 2px solid #FFFFFF;
-}
-
-.userItem3 {
-	display: table-cell;
-	width: 56px;
 	text-align: center;
-	border-left: 2px solid #FFFFFF;
 }
 
 .userHeader {
@@ -279,41 +332,39 @@
 	display: inline;
 }
 
-.code input {
-	height: 22px;
+.clickable {
+	cursor: pointer;
 }
 
-.columnLine {
-	padding: 10px;
-	border: 2px solid #9bd1f2;
-	margin-top: 10px !important;
+.articleHead {
+	display: table-row !important;
+	width: 100% !important;
+	font-family: "微软雅黑" !important;
 }
 
-.columnName {
-	display: block;
-	background-color: #9bd1f2;
-	line-height: 20px;
-	padding: 7px 14px;
+.articleLine {
+	display: table-row !important;
+	width: 100% !important;
 }
 
-.columnForm {
-	display: none;
+.articleList {
+	width: 100% !important;
+	line-height: 40px;
+	display: table;
 }
 
-.columnNormal {
-	
+.articleList span {
+	display: table-cell !important;
 }
 
-.columnStatus {
-	display: none !important;
-} 
-
-.columnSpanContent {
-	width: 87% !important;
-	display: inline-block !important;
+.articleName {
+	width: 500px !important;
 }
 
-.columnSpanButton {
-	width: 12% !important;
-	display: inline-block !important;
+.articleColumn {
+	width: 200px !important;
+}
+
+.articleSpanButton {
+	width: 300px !important;
 }

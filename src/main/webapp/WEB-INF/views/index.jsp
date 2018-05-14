@@ -37,6 +37,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/summernote/summernote.css" rel="stylesheet" type="text/css" />
         <link href="app/css/index.css" rel="stylesheet" type="text/css" />
         <!-- END THEME STYLES -->
 
@@ -304,6 +305,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
         <script src="assets/scripts/app.js" type="text/javascript"></script>
         <script type="text/javascript" src="app/js/index.js"></script>
+        <script type="text/javascript"
+		src="assets/plugins/summernote/summernote.min.js"
+		charset="UTF-8"></script>
         <script type="text/javascript"
 		src="assets/plugins/summernote/lang/summernote-zh-CN.js"
 		charset="UTF-8"></script>

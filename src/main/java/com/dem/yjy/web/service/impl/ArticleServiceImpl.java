@@ -50,8 +50,8 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 	@Override
 	public List<Article> selectList() {
 		ArticleExample example = new ArticleExample();
-		example.createCriteria().andIdIsNotNull().andArticleStatusEqualTo(1);
-		example.setOrderByClause("article_sort");
+		example.createCriteria().andArticleStatusEqualTo(1);
+		example.setOrderByClause("article_sort desc");
 		return articleMapper.selectByExample(example);
 	}
 
@@ -64,7 +64,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 	public List<Article> getListFront() {
 		ArticleExample example = new ArticleExample();
 		example.createCriteria().andArticleStatusEqualTo(1);
-		example.setOrderByClause("article_sort");
+		example.setOrderByClause("article_sort desc");
 		return articleMapper.selectByExample(example);
 	}
 
@@ -108,7 +108,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 	}
 
 	@Override
-	public List<Article> getPage(ArticleQuery articleQuery) {
+	public Page<Article> getPage(ArticleQuery articleQuery) {
 		if (articleQuery != null) {
 			int pageNo = 1;
 			if (articleQuery.getPageNo() != null) {
@@ -118,11 +118,12 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 			ArticleExample example = new ArticleExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andIdIsNotNull().andArticleStatusEqualTo(1);
-			if (articleQuery.getColumn() != null) {
-				criteria.andArtcileColumnEqualTo(articleQuery.getColumn());
+			if (articleQuery.getColumn() != null && !"".equals(articleQuery.getColumn())) {
+				criteria.andArticleColumnEqualTo(articleQuery.getColumn());
 			}
-			example.setOrderByClause("article_sort");
-			return articleMapper.selectByExampleAndPage(example, page);
+			example.setOrderByClause("article_sort desc");
+			articleMapper.selectByExampleAndPage(example, page);
+			return page;
 		} else {
 			return null;
 		}

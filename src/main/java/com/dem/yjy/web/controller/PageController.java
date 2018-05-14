@@ -38,10 +38,15 @@ public class PageController {
         return "preference";
     }
     
-    @RequestMapping("/column")
-    public String column() {
-        return "column";
-    }
+	@RequestMapping("/column")
+	public String column() {
+		return "column";
+	}
+	
+	@RequestMapping("/article")
+	public String article() {
+		return "article";
+	}
 
     /**
      * 404页

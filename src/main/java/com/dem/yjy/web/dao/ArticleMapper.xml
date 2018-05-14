@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.dem.yjy.web.model.Article">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="article_name" jdbcType="VARCHAR" property="articleName" />
-    <result column="artcile_column" jdbcType="VARCHAR" property="artcileColumn" />
-    <result column="article_content" jdbcType="VARCHAR" property="articleContent" />
+    <result column="article_column" jdbcType="VARCHAR" property="articleColumn" />
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
     <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
     <result column="article_keyword" jdbcType="VARCHAR" property="articleKeyword" />
     <result column="article_info" jdbcType="VARCHAR" property="articleInfo" />
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, article_name, artcile_column, article_content, article_title, article_keyword, 
+    id, article_name, article_column, article_content, article_title, article_keyword, 
     article_info, article_sort, article_status
   </sql>
   <select id="selectByExample" parameterType="com.dem.yjy.web.model.ArticleExample" resultMap="BaseResultMap">
@@ -119,12 +119,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dem.yjy.web.model.Article">
-    insert into article (id, article_name, artcile_column, 
+    insert into article (id, article_name, article_column, 
       article_content, article_title, article_keyword, 
       article_info, article_sort, article_status
       )
-    values (#{id,jdbcType=VARCHAR}, #{articleName,jdbcType=VARCHAR}, #{artcileColumn,jdbcType=VARCHAR}, 
-      #{articleContent,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{articleKeyword,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{articleName,jdbcType=VARCHAR}, #{articleColumn,jdbcType=VARCHAR}, 
+      #{articleContent,jdbcType=LONGVARCHAR}, #{articleTitle,jdbcType=VARCHAR}, #{articleKeyword,jdbcType=VARCHAR}, 
       #{articleInfo,jdbcType=VARCHAR}, #{articleSort,jdbcType=INTEGER}, #{articleStatus,jdbcType=INTEGER}
       )
   </insert>
@@ -137,8 +137,8 @@
       <if test="articleName != null">
         article_name,
       </if>
-      <if test="artcileColumn != null">
-        artcile_column,
+      <if test="articleColumn != null">
+        article_column,
       </if>
       <if test="articleContent != null">
         article_content,
@@ -166,11 +166,11 @@
       <if test="articleName != null">
         #{articleName,jdbcType=VARCHAR},
       </if>
-      <if test="artcileColumn != null">
-        #{artcileColumn,jdbcType=VARCHAR},
+      <if test="articleColumn != null">
+        #{articleColumn,jdbcType=VARCHAR},
       </if>
       <if test="articleContent != null">
-        #{articleContent,jdbcType=VARCHAR},
+        #{articleContent,jdbcType=LONGVARCHAR},
       </if>
       <if test="articleTitle != null">
         #{articleTitle,jdbcType=VARCHAR},
@@ -207,11 +207,11 @@
       <if test="record.articleName != null">
         article_name = #{record.articleName,jdbcType=VARCHAR},
       </if>
-      <if test="record.artcileColumn != null">
-        artcile_column = #{record.artcileColumn,jdbcType=VARCHAR},
+      <if test="record.articleColumn != null">
+        article_column = #{record.articleColumn,jdbcType=VARCHAR},
       </if>
       <if test="record.articleContent != null">
-        article_content = #{record.articleContent,jdbcType=VARCHAR},
+        article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.articleTitle != null">
         article_title = #{record.articleTitle,jdbcType=VARCHAR},
@@ -237,8 +237,8 @@
     update article
     set id = #{record.id,jdbcType=VARCHAR},
       article_name = #{record.articleName,jdbcType=VARCHAR},
-      artcile_column = #{record.artcileColumn,jdbcType=VARCHAR},
-      article_content = #{record.articleContent,jdbcType=VARCHAR},
+      article_column = #{record.articleColumn,jdbcType=VARCHAR},
+      article_content = #{record.articleContent,jdbcType=LONGVARCHAR},
       article_title = #{record.articleTitle,jdbcType=VARCHAR},
       article_keyword = #{record.articleKeyword,jdbcType=VARCHAR},
       article_info = #{record.articleInfo,jdbcType=VARCHAR},
@@ -254,11 +254,11 @@
       <if test="articleName != null">
         article_name = #{articleName,jdbcType=VARCHAR},
       </if>
-      <if test="artcileColumn != null">
-        artcile_column = #{artcileColumn,jdbcType=VARCHAR},
+      <if test="articleColumn != null">
+        article_column = #{articleColumn,jdbcType=VARCHAR},
       </if>
       <if test="articleContent != null">
-        article_content = #{articleContent,jdbcType=VARCHAR},
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
       </if>
       <if test="articleTitle != null">
         article_title = #{articleTitle,jdbcType=VARCHAR},
@@ -281,8 +281,8 @@
   <update id="updateByPrimaryKey" parameterType="com.dem.yjy.web.model.Article">
     update article
     set article_name = #{articleName,jdbcType=VARCHAR},
-      artcile_column = #{artcileColumn,jdbcType=VARCHAR},
-      article_content = #{articleContent,jdbcType=VARCHAR},
+      article_column = #{articleColumn,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
       article_keyword = #{articleKeyword,jdbcType=VARCHAR},
       article_info = #{articleInfo,jdbcType=VARCHAR},

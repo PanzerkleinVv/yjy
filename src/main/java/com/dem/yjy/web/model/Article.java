@@ -5,7 +5,7 @@ public class Article {
 
 	private String articleName;
 
-    private String artcileColumn;
+    private String articleColumn;
 
     private String articleContent;
 
@@ -39,12 +39,12 @@ public class Article {
         this.articleName = articleName == null ? null : articleName.trim();
     }
 
-    public String getArtcileColumn() {
-        return artcileColumn;
+    public String getArticleColumn() {
+        return articleColumn;
     }
 
-    public void setArtcileColumn(String artcileColumn) {
-        this.artcileColumn = artcileColumn == null ? null : artcileColumn.trim();
+    public void setArticleColumn(String articleColumn) {
+        this.articleColumn = articleColumn == null ? null : articleColumn.trim();
     }
 
 	public String getArticleContent() {

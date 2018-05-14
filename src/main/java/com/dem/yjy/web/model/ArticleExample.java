@@ -244,73 +244,73 @@ public class ArticleExample {
 			return (Criteria) this;
 		}
 
-        public Criteria andArtcileColumnIsNull() {
-            addCriterion("artcile_column is null");
+        public Criteria andArticleColumnIsNull() {
+            addCriterion("article_column is null");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnIsNotNull() {
-            addCriterion("artcile_column is not null");
+        public Criteria andArticleColumnIsNotNull() {
+            addCriterion("article_column is not null");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnEqualTo(String value) {
-            addCriterion("artcile_column =", value, "artcileColumn");
+        public Criteria andArticleColumnEqualTo(String value) {
+            addCriterion("article_column =", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnNotEqualTo(String value) {
-            addCriterion("artcile_column <>", value, "artcileColumn");
+        public Criteria andArticleColumnNotEqualTo(String value) {
+            addCriterion("article_column <>", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnGreaterThan(String value) {
-            addCriterion("artcile_column >", value, "artcileColumn");
+        public Criteria andArticleColumnGreaterThan(String value) {
+            addCriterion("article_column >", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnGreaterThanOrEqualTo(String value) {
-            addCriterion("artcile_column >=", value, "artcileColumn");
+        public Criteria andArticleColumnGreaterThanOrEqualTo(String value) {
+            addCriterion("article_column >=", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnLessThan(String value) {
-            addCriterion("artcile_column <", value, "artcileColumn");
+        public Criteria andArticleColumnLessThan(String value) {
+            addCriterion("article_column <", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnLessThanOrEqualTo(String value) {
-            addCriterion("artcile_column <=", value, "artcileColumn");
+        public Criteria andArticleColumnLessThanOrEqualTo(String value) {
+            addCriterion("article_column <=", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnLike(String value) {
-            addCriterion("artcile_column like", value, "artcileColumn");
+        public Criteria andArticleColumnLike(String value) {
+            addCriterion("article_column like", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnNotLike(String value) {
-            addCriterion("artcile_column not like", value, "artcileColumn");
+        public Criteria andArticleColumnNotLike(String value) {
+            addCriterion("article_column not like", value, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnIn(List<String> values) {
-            addCriterion("artcile_column in", values, "artcileColumn");
+        public Criteria andArticleColumnIn(List<String> values) {
+            addCriterion("article_column in", values, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnNotIn(List<String> values) {
-            addCriterion("artcile_column not in", values, "artcileColumn");
+        public Criteria andArticleColumnNotIn(List<String> values) {
+            addCriterion("article_column not in", values, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnBetween(String value1, String value2) {
-            addCriterion("artcile_column between", value1, value2, "artcileColumn");
+        public Criteria andArticleColumnBetween(String value1, String value2) {
+            addCriterion("article_column between", value1, value2, "articleColumn");
             return (Criteria) this;
         }
 
-        public Criteria andArtcileColumnNotBetween(String value1, String value2) {
-            addCriterion("artcile_column not between", value1, value2, "artcileColumn");
+        public Criteria andArticleColumnNotBetween(String value1, String value2) {
+            addCriterion("article_column not between", value1, value2, "articleColumn");
             return (Criteria) this;
         }
 

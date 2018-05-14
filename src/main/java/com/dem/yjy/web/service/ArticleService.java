@@ -5,6 +5,7 @@ import com.dem.yjy.web.model.Article;
 
 import java.util.List;
 
+import com.dem.yjy.core.feature.orm.mybatis.Page;
 import com.dem.yjy.core.generic.GenericService;
 
 public interface ArticleService extends GenericService<Article, String> {
@@ -17,5 +18,5 @@ public interface ArticleService extends GenericService<Article, String> {
 	
 	public int getTop();
 	
-	public List<Article> getPage(ArticleQuery articleQuery);
+	public Page<Article> getPage(ArticleQuery articleQuery);
 }

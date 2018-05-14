@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-04-28 03:34:21
+Date: 2018-05-15 01:32:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,11 +22,12 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` varchar(64) NOT NULL,
   `article_name` varchar(255) DEFAULT NULL,
+  `article_column` varchar(255) DEFAULT NULL,
   `article_content` text,
   `article_title` varchar(255) DEFAULT NULL,
   `article_keyword` varchar(255) DEFAULT NULL,
   `article_info` varchar(255) DEFAULT NULL,
-  `article_sort` int(11) DEFAULT NULL,
+  `article_sort` int(11) unsigned DEFAULT '0',
   `article_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -34,6 +35,9 @@ CREATE TABLE `article` (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
+INSERT INTO `article` VALUES ('295a47fcf9ad1c870f7506cfec8ec64914683ca1096466949132c6d73c6e4912', 'qeqweqew', '0990f8a1908630319dc3b970dc766faab997aeca72266d07dd8aac7fffdc67cc', '<p>qeqweqeqweqew</p>', 'qweqeqweq', 'qeqweqeq', 'qweqeqw', '1', '0');
+INSERT INTO `article` VALUES ('90774ea38c7e385673d5f762592410029422e4a9792c45ae059014bba621c222', 'qweqweqwe', '28352ff13dd57ad8cc6d89fa884e80c93cae3d4b2cff3cb217186402ae33bab8', 'qweqeqweq', 'qweqwe', 'qweqwe', 'qweqwe', '5', '1');
+INSERT INTO `article` VALUES ('ed27f15886657c89a10010bae4bdd014242b2f7c77f1859129a400064c5ebb76', 'qweqwe', '28352ff13dd57ad8cc6d89fa884e80c93cae3d4b2cff3cb217186402ae33bab8', 'qweqweqe', 'qeqwe', 'qweqweq', 'qweqwe', '4', '0');
 
 -- ----------------------------
 -- Table structure for column
