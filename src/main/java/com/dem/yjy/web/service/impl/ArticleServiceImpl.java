@@ -129,4 +129,10 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 		}
 	}
 
+	@Override
+	public Page<Article> getFrontPage(ArticleQuery articleQuery) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
