@@ -74,6 +74,14 @@
 	padding: 10px 0;
 	text-align: center;
 }
+
+.nodata {
+	height: 32px;
+	line-height: 32px;
+	text-align: center;
+	color: #999;
+	font-size: 14px;
+}
 </style>
 </head>
 <body>
@@ -90,20 +98,16 @@
 
 		<div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
 			<ul class="am-nav am-nav-pills am-topbar-nav">
-				<li class="am-active" id="nav1"><a href="list?id=all">首页</a></li>
-				<li><a href="#">项目</a></li>
-				<li class="am-dropdown" data-am-dropdown><a
-					class="am-dropdown-toggle" data-am-dropdown-toggle
-					href="javascript:;"> 菜单 <span class="am-icon-caret-down"></span>
-				</a>
-					<ul class="am-dropdown-content">
-						<li class="am-dropdown-header">标题</li>
-						<li><a href="#">关于我们</a></li>
-						<li><a href="#">关于字体</a></li>
-						<li><a href="#">TIPS</a></li>
-					</ul></li>
-			</ul>
+				<li
+					<c:if test='${columnId == null || columnId eq ""}'>class="am-active"</c:if>><a
+					href="/yjy/rest/front/frontpage?columnId=">首页</a></li>
+				<c:forEach var='column' items='${columns}'>
+					<li <c:if test='${columnId eq column.id}'>class="am-active"</c:if>><a
+						href="/yjy/rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
+				</c:forEach>
 
+			</ul>
+			<!--
 			<form
 				class="am-topbar-form am-topbar-left am-form-inline am-topbar-right"
 				role="search">
@@ -113,146 +117,24 @@
 				</div>
 				<button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
 			</form>
-
+			-->
 		</div>
 	</header>
 
 	<div class="am-g am-g-fixed blog-g-fixed">
-		<div class="am-u-md-8">
-			<article class="blog-main">
-				<h3 class="am-article-title blog-title">
-					<a href="#">Google fonts 的字體（display 篇）</a>
-				</h3>
-				<h4 class="am-article-meta blog-meta">
-					by <a href="">open</a> posted on 2014/06/17 under <a href="#">字体</a>
-				</h4>
+		<div class="am-u-md-8 article-div">
 
-				<div class="am-g blog-content">
-					<div class="am-u-lg-7">
-						<p>
-							<!-- 本demo来自 http://blog.justfont.com/ -->
-							你自信滿滿的跟客戶進行第一次 demo。秀出你精心設計的內容時，你原本期許客戶冷不防地掉下感動的眼淚。
-						</p>
-
-						<p>因為那實在是太高級了。</p>
-
-						<p>除了各項基本架構幾乎完美無缺之外，內文是高貴的，有著一些距離感的，典雅的襯線字體。不是 Times New
-							Roman，而是很少有人見過的，你精心挑選過的字體，凸顯你品味的高超。而且它並沒有花上你與業主一毛錢，或許這也非常重要。</p>
-					</div>
-					<div class="am-u-lg-5">
-						<p>
-							<img src="http://f.cl.ly/items/451O3X0g47320D203D1B/不夠活潑.jpg">
-						</p>
-					</div>
-				</div>
-				<div class="am-g">
-					<div class="am-u-sm-12">
-						<p>看著自己的作品，你的喜悅之情溢於言表，差點就要說出我要感謝我的父母之類的得獎感言。但在你對面的客戶先是一點表情也沒有，又瞬間轉為陰沉，抿了抿嘴角冷冷的說……</p>
-
-						<p>「我要一種比較跳的感覺懂嗎？」</p>
-					</div>
-				</div>
-			</article>
-
-			<hr class="am-article-divider blog-hr">
-
-			<article class="blog-main">
-				<h3 class="am-article-title">
-					<a href="#">身邊的字體: Arial (上)</a>
-				</h3>
-				<h4 class="am-article-meta blog-meta">
-					by <a href="">ben</a> posted on 2014/06/17 under <a href="#">javascript</a>
-				</h4>
-
-				<div class="am-g blog-content">
-					<div class="am-u-lg-7">
-						<p>
-							<!--本demo文字来自 http://blog.justfont.com/-->
-							这次要介绍的是大家似乎都狠熟悉却又狠陌生的字体：Arial。不只是对 Typography
-							特别有兴趣的人、碰过排版的人，就算毫无接触，只要打开过电脑的字型选单，应该都有看过这个字型吧。尤其它还是以 A
-							开头，总是会出现在选单最前面。
-						</p>
-
-						<p>Arial 常常跟 Helvetica 搞混，也常被当作是没有 Helvetica 时的替代字体使用。事实上
-							Arial 确实就是故意做得跟 Helvetica 狠相似，连每个字母的宽度都刻意做得一模一样。</p>
-					</div>
-					<div class="am-u-lg-5">
-						<p>
-							<img
-								src="https://farm3.staticflickr.com/2917/14186214720_5d0b8ca2e3_b.jpg">
-						</p>
-					</div>
-				</div>
-				<div class="am-g">
-					<div class="am-u-sm-12">
-						<p>在欧美的排版业界中，使用 Arial 的作品意即是「不使用 Helvetica
-							的作品」，会被认為是设计师对字体的使用没有概念或是太容易妥协，基本上我大致也是同意。</p>
-
-						<p>因為 Helvetica 只有 Mac 上才有內建，Windows 用戶除非花錢買，不然是沒有 Helvetica
-							能用，所以使用 Arial 的設計師往往被看成是不願意對 Typography
-							花錢，專業素養不到家的人。除了在確保網頁相容性等絕對必需的情況外，幾乎可以說是不應該使用的字體。</p>
-
-						<p>但是，在此之前，我們對 Arial 又有多少認識呢？</p>
-					</div>
-				</div>
-			</article>
-
-			<hr class="am-article-divider blog-hr">
-			<ul class="am-pagination blog-pagination">
-				<li class="am-pagination-prev"><a href="">&laquo; 上一页</a></li>
-				<li class="am-pagination-next"><a href="">下一页 &raquo;</a></li>
-			</ul>
+			<input type="hidden" id="columnId" value="${columnId}" />
 		</div>
+
+		<div class="am-u-md-8 nodata">向下加载更多</div>
 
 		<div class="am-u-md-4 blog-sidebar">
 			<div class="am-panel-group">
 				<section class="am-panel am-panel-default">
 					<div class="am-panel-hd">关于我</div>
 					<div class="am-panel-bd">
-						<p>${preferences["description"]}</p>
-					</div>
-				</section>
-				<section class="am-panel am-panel-default">
-					<div class="am-panel-hd">文章目录</div>
-					<ul class="am-list blog-list">
-						<li><a href="#">Google fonts 的字體（sans-serif 篇）</a></li>
-						<li><a href="#">[but]服貿最前線？－再訪桃園機場</a></li>
-						<li><a href="#">到日星鑄字行學字型</a></li>
-						<li><a href="#">glyph font vs. 漢字（上）</a></li>
-						<li><a href="#">浙江民間書刻體上線</a></li>
-						<li><a href="#">[極短篇] Android v.s iOS，誰的字體好讀？</a></li>
-					</ul>
-				</section>
-
-				<section class="am-panel am-panel-default">
-					<div class="am-panel-hd">团队成员</div>
-					<div class="am-panel-bd">
-						<ul class="am-avg-sm-4 blog-team">
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230220_F5LiM.thumb.224_0.jpeg"
-								alt="" /></li>
-							<li><img class="am-thumbnail"
-								src="http://img4.duitang.com/uploads/blog/201406/15/20140615230159_kjTmC.thumb.224_0.jpeg"
-								alt="" /></li>
-						</ul>
+						<p>${preferences["aboutme"]}</p>
 					</div>
 				</section>
 			</div>
@@ -262,7 +144,8 @@
 
 	<footer class="blog-footer">
 		<p>
-			${preferences["name"]}<br /> <small>© Copyright PanzerkleinVv.</small>
+			${preferences["name"]}<br /> <small>© Copyright
+				PanzerkleinVv.</small>
 		</p>
 	</footer>
 
@@ -277,14 +160,68 @@
 	<!--<![endif]-->
 	<script src="/yjy/assets/js/amazeui.min.js"></script>
 	<script lang="javascript">
+		var isbool=true;
 		$(function() {
-			var url = "get";
-			$.getJSON(url,function(data){
-				$("#nav1").nextAll().remove();
-				for (var i in data) {
-					$("#nav1").after("<li><a href=\"list?id=" + data[i].id + "\">" + data[i].columnName + "</a></li>")
-				}
-			});
+			$.ajax({'type':"GET",
+				'url':'/yjy/rest/front/article',
+				'dataType':'json', 'data':{
+					'pageSize' : 5,
+					'column' : $('#columnId').val(),
+					'pageNo' : 1},
+				'beforeSend': function() {
+					$(".nodata").html('加载中……');
+		         },
+				'success':function(data) {
+					if (data.result.length != 0) {
+						$.each(data.result, function(i, n) {
+							$(".article-div").append('<article class="blog-main"><h3 class="am-article-title blog-title">'
+									+ n.articleName
+									+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
+									+ n.articleContent
+									+ '</div></div></article><hr class="am-article-divider blog-hr">');
+						});
+					}
+					if (data.result.length < 5) {
+						$(".nodata").html('没有更多文章了');
+					}
+		}});
+			var winH = $(window).height();
+			var i = 2;
+			$(window)
+					.scroll(
+							function() {
+								isbool=false;
+								var pageH = $(document.body).height();
+								var scrollT = $(window).scrollTop();
+								var aa = (pageH - winH - scrollT) / winH;
+								if (aa < 0.02) {
+									$.ajax({'type':"GET",
+											'url':'/yjy/rest/front/article',
+											'dataType':'json', 'data':{
+												'pageSize' : 5,
+												'column' : $('#columnId').val(),
+												'pageNo' : i},
+											'beforeSend': function() {
+												$(".nodata").html('加载中……');
+									         },
+											'success':function(data) {
+												if (data.result.length != 0) {
+													$.each(data.result, function(i, n) {
+														$(".article-div").append('<article class="blog-main"><h3 class="am-article-title blog-title">'
+																+ n.articleName
+																+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
+																+ n.articleContent
+																+ '</div></div></article><hr class="am-article-divider blog-hr">');
+													});
+													i++;
+													isbool=true;
+												}
+												if (data.result.length < 5) {
+													$(".nodata").html('没有更多文章了');
+												}
+									}});
+								}
+							});
 		});
 	</script>
 

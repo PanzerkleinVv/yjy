@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,22 +44,29 @@ public class FrontController {
 	 * @return
 	 */
 	@RequestMapping(value = "/frontpage")
-	public String frontpage(Model model, HttpServletRequest request) {
-		final Map<String, String> preferences = preferenceService.selectAllPreferences();
+	public String frontpage(Model model, String columnId) {
+		Map<String, String> preferences = preferenceService.selectAllPreferences();;
+		final List<Column> columns = columnService.getListFront();
+		if (columnId != null && !"".equals(columnId)) {
+			for (Column column : columns) {
+				if (columnId.equals(column.getId())) {
+					preferences.put("title", column.getColumnTitle());
+					preferences.put("keywords", column.getColumnKeyword());
+					preferences.put("description", column.getColumnInfo());
+				}
+			}
+		}
 		model.addAttribute("preferences", preferences);
+		model.addAttribute("columnId", columnId);
+		model.addAttribute("columns", columns);
 		return "frontpage";
 	}
 
-	@RequestMapping(value = "/get")
+	@RequestMapping(value = "/article")
 	@ResponseBody
-	public List<Column> get() {
-		return columnService.getListFront();
-	}
-
-	@RequestMapping(value = "/list")
-	@ResponseBody
-	public Page<Article> list(ArticleQuery articleQuery) {
-		return articleService.getFrontPage(articleQuery);
+	public Page<Article> article(ArticleQuery articleQuery) {
+		articleQuery.setPageSize(5);
+		return articleService.getPage(articleQuery);
 	}
 
 }

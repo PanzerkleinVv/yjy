@@ -19,6 +19,4 @@ public interface ArticleService extends GenericService<Article, String> {
 	public int getTop();
 	
 	public Page<Article> getPage(ArticleQuery articleQuery);
-	
-	public Page<Article> getFrontPage(ArticleQuery articleQuery);
 }

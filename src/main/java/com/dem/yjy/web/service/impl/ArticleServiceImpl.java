@@ -78,7 +78,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 				article = new Article();
 				article.setArticleSort(i + 1);
 				article.setId(ids[i]);
-				//flag = articleMapper.updateSortByPrimaryKey(article);
+				// flag = articleMapper.updateSortByPrimaryKey(article);
 				if (flag < 1) {
 					throw new Exception("保存栏目排序出错");
 				}
@@ -114,7 +114,12 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 			if (articleQuery.getPageNo() != null) {
 				pageNo = articleQuery.getPageNo();
 			}
-			Page<Article> page = new Page<>(pageNo);
+			Page<Article> page = null;
+			if (articleQuery.getPageSize() != null) {
+				page = new Page<>(pageNo, articleQuery.getPageSize());
+			} else {
+				page = new Page<>(pageNo);
+			}
 			ArticleExample example = new ArticleExample();
 			Criteria criteria = example.createCriteria();
 			criteria.andIdIsNotNull().andArticleStatusEqualTo(1);
@@ -127,12 +132,6 @@ public class ArticleServiceImpl extends GenericServiceImpl<Article, String> impl
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public Page<Article> getFrontPage(ArticleQuery articleQuery) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

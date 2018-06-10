@@ -7,6 +7,8 @@ public class ArticleQuery {
 	private Integer pageNo;
 	
 	private String id;
+	
+	private Integer pageSize;
 
 	public String getColumn() {
 		return column;
@@ -30,6 +32,14 @@ public class ArticleQuery {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 }
