@@ -125,9 +125,10 @@
 		<div class="am-u-md-8 article-div">
 
 			<input type="hidden" id="columnId" value="${columnId}" />
+			<div class="am-u-lg-7 nodata">向下加载更多</div>
 		</div>
 
-		<div class="am-u-md-8 nodata">向下加载更多</div>
+		
 
 		<div class="am-u-md-4 blog-sidebar">
 			<div class="am-panel-group">
@@ -174,7 +175,7 @@
 				'success':function(data) {
 					if (data.result.length != 0) {
 						$.each(data.result, function(i, n) {
-							$(".article-div").append('<article class="blog-main"><h3 class="am-article-title blog-title">'
+							$("#columnId").before('<article class="blog-main"><h3 class="am-article-title blog-title">'
 									+ n.articleName
 									+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
 									+ n.articleContent
@@ -207,7 +208,7 @@
 											'success':function(data) {
 												if (data.result.length != 0) {
 													$.each(data.result, function(i, n) {
-														$(".article-div").append('<article class="blog-main"><h3 class="am-article-title blog-title">'
+														$("#columnId").before('<article class="blog-main"><h3 class="am-article-title blog-title">'
 																+ n.articleName
 																+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
 																+ n.articleContent
