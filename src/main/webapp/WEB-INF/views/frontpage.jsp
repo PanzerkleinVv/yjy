@@ -20,8 +20,8 @@
 <meta name="description" content='${preferences["description"]}'>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="alternate icon" type="image/png"
-	href="/yjy/assets/i/favicon.png">
-<link rel="stylesheet" href="/yjy/assets/css/amazeui.min.css" />
+	href="/assets/i/favicon.png">
+<link rel="stylesheet" href="/assets/css/amazeui.min.css" />
 <style>
 @media only screen and (min-width: 1200px) {
 	.blog-g-fixed {
@@ -100,10 +100,10 @@
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li
 					<c:if test='${columnId == null || columnId eq ""}'>class="am-active"</c:if>><a
-					href="/yjy/rest/front/frontpage?columnId=">首页</a></li>
+					href="/rest/front/frontpage?columnId=">首页</a></li>
 				<c:forEach var='column' items='${columns}'>
 					<li <c:if test='${columnId eq column.id}'>class="am-active"</c:if>><a
-						href="/yjy/rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
+						href="/rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
 				</c:forEach>
 
 			</ul>
@@ -153,18 +153,18 @@
 	<!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="/yjy/assets/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/assets/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
 
 	<!--[if (gte IE 9)|!(IE)]><!-->
-	<script src="/yjy/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+	<script src="/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
 	<!--<![endif]-->
-	<script src="/yjy/assets/js/amazeui.min.js"></script>
+	<script src="/assets/js/amazeui.min.js"></script>
 	<script lang="javascript">
 		var isbool=true;
 		$(function() {
 			$.ajax({'type':"GET",
-				'url':'/yjy/rest/front/article',
+				'url':'/rest/front/article',
 				'dataType':'json', 'data':{
 					'pageSize' : 5,
 					'column' : $('#columnId').val(),
@@ -197,7 +197,7 @@
 								var aa = (pageH - winH - scrollT) / winH;
 								if (aa < 0.02) {
 									$.ajax({'type':"GET",
-											'url':'/yjy/rest/front/article',
+											'url':'/rest/front/article',
 											'dataType':'json', 'data':{
 												'pageSize' : 5,
 												'column' : $('#columnId').val(),
