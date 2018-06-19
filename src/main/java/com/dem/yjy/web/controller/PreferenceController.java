@@ -33,6 +33,7 @@ public class PreferenceController {
 		String title = request.getParameter("title");
 		String keywords = request.getParameter("keywords");
 		String description = request.getParameter("description");
+		String aboutme = request.getParameter("aboutme");
 		List<Preference> preferences = new ArrayList<Preference>();
 		Preference preference = new Preference();
 		preference.setId(1);
@@ -49,6 +50,9 @@ public class PreferenceController {
 		preference = new Preference();
 		preference.setId(4);
 		preference.setValue(description);
+		preferences.add(preference);
+		preference.setId(5);
+		preference.setValue(aboutme);
 		preferences.add(preference);
 
 		int result = 0;
