@@ -19,9 +19,8 @@
 <meta name="keywords" content='${preferences["keywords"]}'>
 <meta name="description" content='${preferences["description"]}'>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="alternate icon" type="image/png"
-	href="/assets/i/favicon.png">
-<link rel="stylesheet" href="/assets/css/amazeui.min.css" />
+<link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+<link rel="stylesheet" href="assets/css/amazeui.min.css" />
 <style>
 @media only screen and (min-width: 1200px) {
 	.blog-g-fixed {
@@ -35,12 +34,19 @@
 	}
 }
 
+.article-div {
+	background-color: RGBA(204, 204, 204, .3);
+	border-radius: 40px;
+}
+
 .blog-main {
-	padding: 20px 0;
+	padding: 20px 0 20px 0;
 }
 
 .blog-title {
 	margin: 10px 0 20px 0;
+	padding: 10px 10px 10px 0;
+	background-color: RGBA(255, 255, 255, .2);
 }
 
 .blog-meta {
@@ -75,12 +81,27 @@
 	text-align: center;
 }
 
+.blog-sidebar {
+	background-color: RGBA(204, 204, 204, .3);
+	border-radius: 20px;
+}
+
 .nodata {
 	height: 32px;
 	line-height: 32px;
 	text-align: center;
 	color: #999;
 	font-size: 14px;
+}
+
+body {
+	background-image: url(app/img/back.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+header {
+	background-image: linear-gradient(to bottom, #333 0%, rgb(248, 248, 248) 40%, rgb(248, 248, 248) 80%, RGBA(255, 255, 255, .1) 100%);
 }
 </style>
 </head>
@@ -100,10 +121,10 @@
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li
 					<c:if test='${columnId == null || columnId eq ""}'>class="am-active"</c:if>><a
-					href="/rest/front/frontpage?columnId=">首页</a></li>
+					href="rest/front/frontpage?columnId=">首页</a></li>
 				<c:forEach var='column' items='${columns}'>
 					<li <c:if test='${columnId eq column.id}'>class="am-active"</c:if>><a
-						href="/rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
+						href="rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
 				</c:forEach>
 
 			</ul>
@@ -125,10 +146,10 @@
 		<div class="am-u-md-8 article-div">
 
 			<input type="hidden" id="columnId" value="${columnId}" />
-			<div class="am-u-lg-7 nodata">向下加载更多</div>
+			<div class="am-u-lg-12 nodata">向下加载更多</div>
 		</div>
 
-		
+
 
 		<div class="am-u-md-4 blog-sidebar">
 			<div class="am-panel-group">
@@ -157,70 +178,95 @@
 <![endif]-->
 
 	<!--[if (gte IE 9)|!(IE)]><!-->
-	<script src="/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+	<script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script>
 	<!--<![endif]-->
-	<script src="/assets/js/amazeui.min.js"></script>
+	<script src="assets/js/amazeui.min.js"></script>
 	<script lang="javascript">
-		var isbool=true;
+		var isbool = true;
 		$(function() {
-			$.ajax({'type':"GET",
-				'url':'/rest/front/article',
-				'dataType':'json', 'data':{
-					'pageSize' : 5,
-					'column' : $('#columnId').val(),
-					'pageNo' : 1},
-				'beforeSend': function() {
-					$(".nodata").html('加载中……');
-		         },
-				'success':function(data) {
-					if (data.result.length != 0) {
-						$.each(data.result, function(i, n) {
-							$("#columnId").before('<article class="blog-main"><h3 class="am-article-title blog-title">'
-									+ n.articleName
-									+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
-									+ n.articleContent
-									+ '</div></div></article><hr class="am-article-divider blog-hr">');
-						});
-					}
-					if (data.result.length < 5) {
-						$(".nodata").html('没有更多文章了');
-					}
-		}});
+			$
+					.ajax({
+						'type' : "GET",
+						'url' : 'rest/front/article',
+						'dataType' : 'json',
+						'data' : {
+							'pageSize' : 5,
+							'column' : $('#columnId').val(),
+							'pageNo' : 1
+						},
+						'beforeSend' : function() {
+							$(".nodata").html('加载中……');
+						},
+						'success' : function(data) {
+							if (data.result.length != 0) {
+								$
+										.each(
+												data.result,
+												function(i, n) {
+													$("#columnId")
+															.before(
+																	'<article class="blog-main"><h3 class="am-article-title blog-title">'
+																			+ n.articleName
+																			+ '</h3><div class="am-g blog-content"><div class="am-u-lg-12">'
+																			+ n.articleContent
+																			+ '</div></div></article><hr class="am-article-divider blog-hr">');
+												});
+							}
+							if (data.result.length < 5) {
+								$(".nodata").html('没有更多文章了');
+							}
+						}
+					});
 			var winH = $(window).height();
 			var i = 2;
 			$(window)
 					.scroll(
 							function() {
-								isbool=false;
+								isbool = false;
 								var pageH = $(document.body).height();
 								var scrollT = $(window).scrollTop();
 								var aa = (pageH - winH - scrollT) / winH;
 								if (aa < 0.02) {
-									$.ajax({'type':"GET",
-											'url':'/rest/front/article',
-											'dataType':'json', 'data':{
-												'pageSize' : 5,
-												'column' : $('#columnId').val(),
-												'pageNo' : i},
-											'beforeSend': function() {
-												$(".nodata").html('加载中……');
-									         },
-											'success':function(data) {
-												if (data.result.length != 0) {
-													$.each(data.result, function(i, n) {
-														$("#columnId").before('<article class="blog-main"><h3 class="am-article-title blog-title">'
-																+ n.articleName
-																+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
-																+ n.articleContent
-																+ '</div></div></article><hr class="am-article-divider blog-hr">');
-													});
-													i++;
-													isbool=true;
+									$
+											.ajax({
+												'type' : "GET",
+												'url' : 'rest/front/article',
+												'dataType' : 'json',
+												'data' : {
+													'pageSize' : 5,
+													'column' : $('#columnId')
+															.val(),
+													'pageNo' : i
+												},
+												'beforeSend' : function() {
+													$(".nodata").html('加载中……');
+												},
+												'success' : function(data) {
+													if (data.result.length != 0) {
+														$
+																.each(
+																		data.result,
+																		function(
+																				i,
+																				n) {
+																			$(
+																					"#columnId")
+																					.before(
+																							'<article class="blog-main"><h3 class="am-article-title blog-title">'
+																									+ n.articleName
+																									+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
+																									+ n.articleContent
+																									+ '</div></div></article><hr class="am-article-divider blog-hr">');
+																		});
+														i++;
+														isbool = true;
+													}
+													if (data.result.length < 5) {
+														$(".nodata").html(
+																'没有更多文章了');
+													}
 												}
-												if (data.result.length < 5) {
-													$(".nodata").html('没有更多文章了');
-												}
-									}});
+											});
 								}
 							});
 		});

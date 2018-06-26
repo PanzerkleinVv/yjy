@@ -141,7 +141,7 @@
 					['fontsize', ['fontname', 'fontsize']],
 					['color', ['color']],
 					[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-					[ 'Insert', [ 'table' ] ] ],
+					[ 'Insert', [ 'link','table' ] ] ],
 				fontNames: ['宋体', '黑体', '楷体', '微软雅黑'],
 				disableDragAndDrop: true
 			});

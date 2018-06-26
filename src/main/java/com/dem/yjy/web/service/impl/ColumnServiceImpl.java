@@ -48,7 +48,7 @@ public class ColumnServiceImpl extends GenericServiceImpl<Column, String> implem
 	public List<Column> selectList() {
 		ColumnExample example = new ColumnExample();
 		example.createCriteria().andIdIsNotNull();
-		example.setOrderByClause("column_sort");
+		example.setOrderByClause("column_sort desc");
 		return columnMapper.selectByExample(example);
 	}
 
@@ -61,7 +61,7 @@ public class ColumnServiceImpl extends GenericServiceImpl<Column, String> implem
 	public List<Column> getListFront() {
 		ColumnExample example = new ColumnExample();
 		example.createCriteria().andColumnStatusEqualTo(1);
-		example.setOrderByClause("column_sort");
+		example.setOrderByClause("column_sort desc");
 		return columnMapper.selectByExample(example);
 	}
 

@@ -42,7 +42,7 @@
 				pass = check(i);
 			//	data0.push({"id": i ,"value": $('#'+i).val()});
 			}
-			var data0 = {name : $("#1").val(), title : $("#2").val(), keywords : $("#3").val(), description : $("#4").val(), aboutme : $("#5")}
+			var data0 = {name : $("#1").val(), title : $("#2").val(), keywords : $("#3").val(), description : $("#4").val(), aboutme : $("#5").val()}
 			if (pass) {
 				$.ajax({
 					url : url,
