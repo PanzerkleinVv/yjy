@@ -19,8 +19,8 @@
 <meta name="keywords" content='${preferences["keywords"]}'>
 <meta name="description" content='${preferences["description"]}'>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
-<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+<link rel="alternate icon" type="image/png" href="/assets/i/favicon.png">
+<link rel="stylesheet" href="/assets/css/amazeui.min.css" />
 <style>
 @media only screen and (min-width: 1200px) {
 	.blog-g-fixed {
@@ -95,7 +95,7 @@
 }
 
 body {
-	background-image: url(app/img/back.png);
+	background-image: url(/app/img/back.png);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
@@ -178,9 +178,9 @@ header {
 <![endif]-->
 
 	<!--[if (gte IE 9)|!(IE)]><!-->
-	<script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script>
+	<script src="/assets/plugins/jquery/jquery-1.11.1.min.js"></script>
 	<!--<![endif]-->
-	<script src="assets/js/amazeui.min.js"></script>
+	<script src="/assets/js/amazeui.min.js"></script>
 	<script lang="javascript">
 		var isbool = true;
 		$(function() {
