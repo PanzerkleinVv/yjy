@@ -72,12 +72,14 @@ public class ColumnServiceImpl extends GenericServiceImpl<Column, String> implem
 		Column column = null;
 		if (ids != null) {
 			for (int i = 0; i < ids.length; i++) {
-				column = new Column();
-				column.setColumnSort(i + 1);
-				column.setId(ids[i]);
-				flag = columnMapper.updateSortByPrimaryKey(column);
-				if (flag < 1) {
-					throw new Exception("保存栏目排序出错");
+				if (ids[i] != null && !"".equals(ids[i])) {
+					column = new Column();
+					column.setColumnSort(i + 1);
+					column.setId(ids[i]);
+					flag = columnMapper.updateSortByPrimaryKey(column);
+					if (flag < 1) {
+						throw new Exception("保存栏目排序出错");
+					}
 				}
 			}
 			flag = ids.length;
