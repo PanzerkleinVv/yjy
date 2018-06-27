@@ -94,14 +94,21 @@
 	font-size: 14px;
 }
 
-body {
-	background-image: url(/app/img/back.png);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+body:before {
+	content: ' ';
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(/app/img/back.png) center 0 no-repeat;
+	background-size: cover;
 }
 
 header {
-	background-image: linear-gradient(to bottom, #333 0%, rgb(248, 248, 248) 40%, rgb(248, 248, 248) 80%, RGBA(255, 255, 255, .1) 100%);
+	background-image: linear-gradient(to bottom, #333 0%, rgb(248, 248, 248)
+		40%, rgb(248, 248, 248) 80%, RGBA(255, 255, 255, .1) 100%);
 }
 </style>
 </head>
@@ -121,10 +128,10 @@ header {
 			<ul class="am-nav am-nav-pills am-topbar-nav">
 				<li
 					<c:if test='${columnId == null || columnId eq ""}'>class="am-active"</c:if>><a
-					href="rest/front/frontpage?columnId=">首页</a></li>
+					href="/rest/front/frontpage?columnId=">首页</a></li>
 				<c:forEach var='column' items='${columns}'>
 					<li <c:if test='${columnId eq column.id}'>class="am-active"</c:if>><a
-						href="rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
+						href="/rest/front/frontpage?columnId=${column.id}">${column.columnName}</a></li>
 				</c:forEach>
 
 			</ul>
@@ -187,7 +194,7 @@ header {
 			$
 					.ajax({
 						'type' : "GET",
-						'url' : 'rest/front/article',
+						'url' : '/rest/front/article',
 						'dataType' : 'json',
 						'data' : {
 							'pageSize' : 5,
@@ -226,11 +233,11 @@ header {
 								var pageH = $(document.body).height();
 								var scrollT = $(window).scrollTop();
 								var aa = (pageH - winH - scrollT) / winH;
-								if (aa < 0.02) {
+								if (aa < 0.02 || $(".nodata").html() != '加载中……') {
 									$
 											.ajax({
 												'type' : "GET",
-												'url' : 'rest/front/article',
+												'url' : '/rest/front/article',
 												'dataType' : 'json',
 												'data' : {
 													'pageSize' : 5,
