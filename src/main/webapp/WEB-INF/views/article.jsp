@@ -200,27 +200,31 @@
 						if (check($('#articleInfo').get(0))) {
 							if (check($('#articleColumn').get(0))) {
 								var url = 'rest/article/save';
-								$.getJSON(url, 
-										{
-											'id' : $('#id').val(),
-											'articleName' : $('#articleName').val(),
-											'articleContent' : $('#summernote').summernote('code'),
-											'articleTitle' : $('#articleTitle').val(),
-											'articleKeyword' : $('#articleKeyword').val(),
-											'articleInfo' : $('#articleInfo').val(),
-											'articleColumn' : $('#articleColumn').val()
-										},
-										function(data) {
-											$('#id').val(data.id);
-											$('#articleName').val(data.articleName);
-											$('#articleTitle').val(data.articleTitle);
-											$('#articleKeyword').val(data.articleKeyword);
-											$('#articleInfo').val(data.articleInfo);
-											$('#summernote').summernote('code', data.articleContent);
-											$('#articleColumn').val(data.articleColumn);
-											$("#msg").css('display', 'block');
-											$("#msg").css('color', data.msg0);
-											$("#msg").html(data.msg);
+								$.ajax({
+									'type' : "POST",
+									'url' : url,
+									'data' : {
+										'id' : $('#id').val(),
+										'articleName' : $('#articleName').val(),
+										'articleContent' : $('#summernote').summernote('code'),
+										'articleTitle' : $('#articleTitle').val(),
+										'articleKeyword' : $('#articleKeyword').val(),
+										'articleInfo' : $('#articleInfo').val(),
+										'articleColumn' : $('#articleColumn').val()
+									},
+									dataType : "json",
+									success : function(data) {
+										$('#id').val(data.id);
+										$('#articleName').val(data.articleName);
+										$('#articleTitle').val(data.articleTitle);
+										$('#articleKeyword').val(data.articleKeyword);
+										$('#articleInfo').val(data.articleInfo);
+										$('#summernote').summernote('code', data.articleContent);
+										$('#articleColumn').val(data.articleColumn);
+										$("#msg").css('display', 'block');
+										$("#msg").css('color', data.msg0);
+										$("#msg").html(data.msg);
+									}
 								});
 							} else {
 								return false;
