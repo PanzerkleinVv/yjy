@@ -102,8 +102,6 @@ body:before {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	/* background: url(/app/img/back.png) center 0 no-repeat; */
-	background-color: #1570a675;
 	background-size: cover;
 }
 
