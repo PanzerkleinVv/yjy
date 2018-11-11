@@ -102,21 +102,37 @@ body:before {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background: url(/app/img/back.png) center 0 no-repeat;
+	/* background: url(/app/img/back.png) center 0 no-repeat; */
+	background-color: #1570a675;
 	background-size: cover;
 }
 
 header {
-	background-image: linear-gradient(to bottom, #333 0%, rgb(248, 248, 248)
-		40%, rgb(248, 248, 248) 80%, RGBA(255, 255, 255, .1) 100%);
+	background-color: #1570a6;
 }
+
+.is-click-title {
+	cursor: pointer;
+}
+
+.is-hide-title {
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.is-hide {
+	display: none;
+}
+
+.is-hide-article {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}
+
 </style>
 </head>
 <body>
 	<header class="am-topbar">
-		<h1 class="am-topbar-brand">
-			<a href="#">${preferences["name"]}</a>
-		</h1>
 
 		<button
 			class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
@@ -135,17 +151,6 @@ header {
 				</c:forEach>
 
 			</ul>
-			<!--
-			<form
-				class="am-topbar-form am-topbar-left am-form-inline am-topbar-right"
-				role="search">
-				<div class="am-form-group">
-					<input type="text" class="am-form-field am-input-sm"
-						placeholder="搜索文章">
-				</div>
-				<button type="submit" class="am-btn am-btn-default am-btn-sm">搜索</button>
-			</form>
-			-->
 		</div>
 	</header>
 
@@ -154,19 +159,6 @@ header {
 
 			<input type="hidden" id="columnId" value="${columnId}" />
 			<div class="am-u-lg-12 nodata">向下加载更多</div>
-		</div>
-
-
-
-		<div class="am-u-md-4 blog-sidebar">
-			<div class="am-panel-group">
-				<section class="am-panel am-panel-default">
-					<div class="am-panel-hd">关于我</div>
-					<div class="am-panel-bd">
-						<p>${preferences["aboutme"]}</p>
-					</div>
-				</section>
-			</div>
 		</div>
 
 	</div>
@@ -210,18 +202,35 @@ header {
 										.each(
 												data.result,
 												function(i, n) {
-													$("#columnId")
+													if (i != 0) {
+														$("#columnId")
 															.before(
-																	'<article class="blog-main"><h3 class="am-article-title blog-title">'
+																	'<article class="blog-main is-hide-article"><h3 class="am-article-title blog-title is-hide-title is-click-title">'
 																			+ n.articleName
-																			+ '</h3><div class="am-g blog-content"><div class="am-u-lg-12">'
+																			+ '</h3><div class="am-g blog-content is-hide"><div class="am-u-lg-12">'
 																			+ n.articleContent
 																			+ '</div></div></article><hr class="am-article-divider blog-hr">');
+													} else {
+														$("#columnId")
+														.before(
+																'<article class="blog-main"><h3 class="am-article-title blog-title">'
+																		+ n.articleName
+																		+ '</h3><div class="am-g blog-content"><div class="am-u-lg-12">'
+																		+ n.articleContent
+																		+ '</div></div></article><hr class="am-article-divider blog-hr">');
+													}
 												});
 							}
 							if (data.result.length < 5) {
 								$(".nodata").html('没有更多文章了');
 							}
+
+							
+							$(".is-hide-title").click(function () {
+								$(this).toggleClass("is-hide-title");
+								$(this).next().toggleClass("is-hide");
+								$(this).parent().toggleClass("is-hide-article");
+							});
 						}
 					});
 			var winH = $(window).height();
@@ -259,9 +268,9 @@ header {
 																			$(
 																					"#columnId")
 																					.before(
-																							'<article class="blog-main"><h3 class="am-article-title blog-title">'
+																							'<article class="blog-main is-hide-article"><h3 class="am-article-title blog-title is-hide-title is-click-title">'
 																									+ n.articleName
-																									+ '</h3><div class="am-g blog-content"><div class="am-u-lg-7">'
+																									+ '</h3><div class="am-g blog-content is-hide"><div class="am-u-lg-7">'
 																									+ n.articleContent
 																									+ '</div></div></article><hr class="am-article-divider blog-hr">');
 																		});
@@ -272,12 +281,27 @@ header {
 														$(".nodata").html(
 																'没有更多文章了');
 													}
+													
+													$(".is-hide-title").click(function () {
+														$(this).toggleClass("is-hide-title");
+														$(this).next().toggleClass("is-hide");
+														$(this).parent().toggleClass("is-hide-article");
+													});
 												}
 											});
 								}
 							});
 		});
 	</script>
-
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+  			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?140d1f49215c81203f9f22c0a2eb212a";
+			var s = document.getElementsByTagName("script")[0]; 
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	
 </body>
 </html>
